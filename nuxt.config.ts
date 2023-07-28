@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-let configPath = './config/dev.js'
+let configPath = './config'
 
 switch (process.env.APP_ENV) {
   case 'staging':

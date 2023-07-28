@@ -2,8 +2,8 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "nuxt build --mode dev",
-    "dev": "nuxt dev --mode dev",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
     "staging": "APP_ENV=staging nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

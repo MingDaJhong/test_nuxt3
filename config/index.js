@@ -1,10 +1,10 @@
 'use strict'
 
 module.exports = {
-  title: 'dev page',
+  title: 'index page',
   meta: {
   },
   api: {
-    base_url: 'https://dev.com'
+    base_url: 'https://index.com'
   }
 }
