@@ -1,49 +1,25 @@
 <template>
   <div class="w-full h-full flex items-center justify-center">
     <!-- Card -->
-    <div
-      class="bg-primary1-100 border border-[1px] border-gray-500 rounded w-[500px] h-[650px] pt-[120px]
-      px-[50px] flex flex-col items-center justify-between shadow-2xl"
-      :style="paddingBottom"
-    >
+    <div class="bg-primary1-100 border border-[1px] border-gray-500 rounded w-[500px] h-[650px] pt-[120px]
+      px-[50px] flex flex-col items-center justify-between shadow-2xl" :style="paddingBottom">
       <!-- Input Group -->
       <div class="flex flex-col gap-12 w-full">
-        <baseInput
-          v-model="userAccount"
-          :placeholder="'Account'"
-          :warning-text="emailWarning"
-          @userEnter="handleUserClick"
-        />
-        <baseInput
-          v-model="userPassword"
-          :placeholder="'Password'"
-          :type="'password'"
-          :warning-text="passwordWarning"
-          @userEnter="handleUserClick"
-        />
-        <baseInput
-          v-if="showSignUp"
-          v-model="userConfirmPassword"
-          :placeholder="'Confirm Password'"
-          :type="'password'"
-          :warning-text="confirmWarning"
-          @userEnter="handleUserClick"
-        />
+        <baseInput v-model="userAccount" :placeholder="'Account'" :warning-text="emailWarning"
+          @userEnter="handleUserClick" />
+        <baseInput v-model="userPassword" :placeholder="'Password'" :type="'password'" :warning-text="passwordWarning"
+          @userEnter="handleUserClick" />
+        <baseInput v-if="showSignUp" v-model="userConfirmPassword" :placeholder="'Confirm Password'" :type="'password'"
+          :warning-text="confirmWarning" @userEnter="handleUserClick" />
       </div>
       <!-- End Input Group -->
       <!-- Button Group -->
       <div class="w-full h-[150px] flex flex-col items-center gap-8">
-        <button
-          class="w-[80%] h-[60px] rounded bg-primary1-400 text-gray-100 text-xl
-          font-medium hover:shadow-xl active:bg-primary1-600"
-          @click="handleUserClick"
-        >
+        <button class="w-[80%] h-[60px] rounded bg-primary1-400 text-gray-100 text-xl
+          font-medium hover:shadow-xl active:bg-primary1-600" @click="handleUserClick">
           {{ buttonText }}
         </button>
-        <div
-          class="cursor-pointer underline text-gray-600"
-          @click="toggleSignUp"
-        >
+        <div class="cursor-pointer underline text-gray-600" @click="toggleSignUp">
           {{ signUpText }}
         </div>
       </div>
@@ -54,8 +30,12 @@
 </template>
 
 <script setup>
-import { ref, computed, watch,onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import baseInput from '@/components/baseInput.vue'
+import { useUserStore } from '@/stores/user.js'
+
+// stores
+const userStore = useUserStore()
 
 const userAccount = ref('')
 const userPassword = ref('')
@@ -117,7 +97,7 @@ const toggleSignUp = () => {
   showSignUp.value = !showSignUp.value
 }
 
-const handleUserClick = () => {
+const handleUserClick = async () => {
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
   const passwordRegex = /^[a-zA-Z0-9]+$/
 
@@ -141,7 +121,16 @@ const handleUserClick = () => {
       console.log('call sign up api')
     }
   } else {
-    console.log('call log in api')
+    await login()
+  }
+}
+
+const login = async () => {
+  const response = await userStore.login()
+
+  if (response.result) {
+    const router = useRouter()
+    router.push('/user')
   }
 }
 

@@ -8,10 +8,7 @@
 </template>
 
 <script setup>
-// import { useUserStore } from '@/stores/user.js'
 import NavBar from '@/components/navBar.vue'
-
-// const userStore = useUserStore()
 
 </script>
 

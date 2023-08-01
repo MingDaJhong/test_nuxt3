@@ -2,28 +2,55 @@ import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    userName: 'Darren Test',
-    userID: '12345',
-    userLevel: 1
+    userName: '',
+    userID: '',
+    userLevel: ''
   }),
   actions: {
-    showURL () {
-      const BASE_URL = useRuntimeConfig().public.BASE_API
-      console.log('BASE_URL HERE:', BASE_URL)
-    },
-    async upgrade () {
-      await new Promise(resolve => {
-        setTimeout(() => {
-          resolve()
-        }, 500)
-      })
+    async init () {
+      const userInfo = localStorage.getItem('userInfo')
 
-      this.userLevel = this.userLevel + 1
-    },
-    async fetchTodos () {
-      const response = await useFetch('https://jsonplaceholder.typicode.com/todos')
+      if (userInfo && !this.userName) {
+        console.log('set store data')
+        const parsedData = JSON.parse(userInfo)
 
-      console.log(response)
+        Object.keys(parsedData).forEach(key => {
+          this[key] = parsedData[key]
+        })
+      }
+    },
+    async login () {
+      const response = await $fetch('https://jsonplaceholder.typicode.com/todos/1')
+
+      let returnPayload = {
+        result: false,
+        errorCode: ''
+      }
+
+      if (response) {
+        returnPayload.result = true
+
+        this.userName = 'Darren'
+        this.userID = 'test ID',
+        this.userLevel = 'Admin'
+
+        const payload = {
+          userName: 'Darren',
+          userID: 'test ID',
+          userLevel: 'Admin'
+        }
+
+        localStorage.setItem('userInfo', JSON.stringify(payload))
+      }
+
+      return returnPayload
+    },
+    async logout () {
+      localStorage.removeItem('userInfo')
+
+      this.userName = ''
+      this.userID = ''
+      this.userLevel = ''
     }
   }
 })
