@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "pm2-runtime start ecosystem.config.js"
+    "deploy": "npm install && nuxt build && pm2-runtime start ecosystem.config.js"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
