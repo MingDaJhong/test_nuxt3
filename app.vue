@@ -10,10 +10,15 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import NavBar from '@/components/navBar.vue'
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore()
 
 const { $setResizeListener, $removeResizeListener } = useNuxtApp()
 
-onMounted(() => {
+onMounted(async () => {
+  await userStore.callApiTest()
+
   $setResizeListener()
 })
 onUnmounted(() => {

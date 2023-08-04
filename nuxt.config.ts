@@ -16,12 +16,22 @@ export default defineNuxtConfig({
       title: config.title,
     }
   },
+  devServer: {
+    port: 3002,
+  },
   vite: {
     define: {
         __VUE_I18N_FULL_INSTALL__: true,
         __VUE_I18N_LEGACY_API__: false,
         __INTLIFY_PROD_DEVTOOLS__: false,
     },
+    server: {
+      // for local dev test with nginx config
+      hmr: {
+        protocol: 'ws',
+        host: 'localhost'
+      }
+    }
   },
   runtimeConfig: {
     public: {

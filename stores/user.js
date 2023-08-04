@@ -56,6 +56,14 @@ export const useUserStore = defineStore('user', {
     },
     changeUserName () {
       this.userName = 'Test'
+    },
+    async callApiTest () {
+      console.log('call api')
+      const response = await $fetch('https://shellfanstest-rr7tb4kqva-uc.a.run.app', {
+        method: 'GET'
+      })
+
+      console.log("🚀 ~ file: user.js:62 ~ callApiTest ~ response:", response)
     }
   }
 })

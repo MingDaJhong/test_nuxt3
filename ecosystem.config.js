@@ -6,7 +6,7 @@ module.exports = {
       instances: 'max',
       script: './.output/server/index.mjs',
       env: {
-        NITRO_PORT: 3000,
+        NITRO_PORT: 3002,
         NITRO_HOST: '0.0.0.0'
       }
     }
