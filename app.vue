@@ -8,7 +8,17 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
 import NavBar from '@/components/navBar.vue'
+
+const { $setResizeListener, $removeResizeListener } = useNuxtApp()
+
+onMounted(() => {
+  $setResizeListener()
+})
+onUnmounted(() => {
+  $removeResizeListener()
+})
 
 </script>
 

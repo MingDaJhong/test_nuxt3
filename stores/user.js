@@ -22,6 +22,8 @@ export const useUserStore = defineStore('user', {
     async login () {
       const response = await $fetch('https://jsonplaceholder.typicode.com/todos/1')
 
+      useNuxtApp().$apiHandle(response)
+
       let returnPayload = {
         result: false,
         errorCode: ''
@@ -51,6 +53,9 @@ export const useUserStore = defineStore('user', {
       this.userName = ''
       this.userID = ''
       this.userLevel = ''
+    },
+    changeUserName () {
+      this.userName = 'Test'
     }
   }
 })

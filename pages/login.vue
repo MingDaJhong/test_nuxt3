@@ -37,10 +37,12 @@ import { useUserStore } from '@/stores/user.js'
 // stores
 const userStore = useUserStore()
 
+// user input text
 const userAccount = ref('')
 const userPassword = ref('')
 const userConfirmPassword = ref('')
 
+// warning text
 const emailWarning = ref('')
 const passwordWarning = ref('')
 const confirmWarning = ref('')
