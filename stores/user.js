@@ -11,7 +11,6 @@ export const useUserStore = defineStore('user', {
       const userInfo = localStorage.getItem('userInfo')
 
       if (userInfo && !this.userName) {
-        console.log('set store data')
         const parsedData = JSON.parse(userInfo)
 
         Object.keys(parsedData).forEach(key => {

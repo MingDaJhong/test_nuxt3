@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 // get space unit
 const space = () => {
-  let unit = 2.5
-  let result = {}
+  const unit = 2.5
+  const result = {}
 
-  for (let i = 1;i<=100;i++) {
-    result[i] = `${unit*i}px`
+  for (let i = 1; i <= 100; i++) {
+    result[i] = `${unit * i}px`
   }
 
   return result
@@ -13,12 +13,12 @@ const space = () => {
 
 module.exports = {
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
-    "./app.vue"
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
+    './app.vue'
   ],
   theme: {
     colors: {
@@ -83,5 +83,5 @@ module.exports = {
       pattern: /(bg|text)-(.*)/
     }
   ],
-  plugins: [],
+  plugins: []
 }

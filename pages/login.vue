@@ -1,9 +1,14 @@
 <template>
   <div class="w-full h-full flex items-center justify-center">
+    <rotatingCube
+      :top="250"
+      :left="700"
+    />
+    <!-- <earth /> -->
     <!-- Card -->
     <div
-      class="bg-primary1-100 border border-gray-500 rounded w-[500px] h-[650px] pt-[120px]
-      px-[50px] flex flex-col items-center justify-between shadow-2xl"
+      class="backdrop-blur-2xl border border-white rounded w-[500px] h-[650px] pt-[120px]
+      px-[50px] flex flex-col items-center justify-between shadow-2xl "
       :style="paddingBottom"
     >
       <!-- Input Group -->
@@ -54,6 +59,8 @@
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import baseInput from '@/components/baseInput.vue'
 import { useUserStore } from '@/stores/user.js'
+import rotatingCube from '@/components/rotatingCube.vue'
+// import earth from '@/components/earth.vue'
 
 // stores
 const userStore = useUserStore()

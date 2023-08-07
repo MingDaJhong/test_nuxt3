@@ -10,7 +10,7 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import NavBar from '@/components/navBar.vue'
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
 
