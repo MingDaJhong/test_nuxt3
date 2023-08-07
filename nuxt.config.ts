@@ -3,7 +3,7 @@
 let configPath = './config'
 
 switch (process.env.APP_ENV) {
-  case 'staging':
+case 'staging':
   configPath = './config/staging.js'
   break
 }
@@ -13,17 +13,17 @@ const config = require(configPath)
 export default defineNuxtConfig({
   app: {
     head: {
-      title: config.title,
+      title: config.title
     }
   },
   devServer: {
-    port: 3002,
+    port: 3002
   },
   vite: {
     define: {
-        __VUE_I18N_FULL_INSTALL__: true,
-        __VUE_I18N_LEGACY_API__: false,
-        __INTLIFY_PROD_DEVTOOLS__: false,
+      __VUE_I18N_FULL_INSTALL__: true,
+      __VUE_I18N_LEGACY_API__: false,
+      __INTLIFY_PROD_DEVTOOLS__: false
     },
     server: {
       // for local dev test with nginx config
@@ -39,13 +39,13 @@ export default defineNuxtConfig({
     }
   },
   css: [
-    '@/assets/css/main.css',
+    '@/assets/css/main.css'
   ],
   postcss: {
     plugins: {
       tailwindcss: {},
-      autoprefixer: {},
-    },
+      autoprefixer: {}
+    }
   },
   modules: [
     '@pinia/nuxt',

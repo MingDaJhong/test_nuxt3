@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', {
     userLevel: ''
   }),
   actions: {
-    async init () {
+    init () {
       const userInfo = localStorage.getItem('userInfo')
 
       if (userInfo && !this.userName) {
@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', {
 
       useNuxtApp().$apiHandle(response)
 
-      let returnPayload = {
+      const returnPayload = {
         result: false,
         errorCode: ''
       }
@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
         returnPayload.result = true
 
         this.userName = 'Darren'
-        this.userID = 'test ID',
+        this.userID = 'test ID'
         this.userLevel = 'Admin'
 
         const payload = {
@@ -47,23 +47,43 @@ export const useUserStore = defineStore('user', {
 
       return returnPayload
     },
-    async logout () {
+    logout () {
       localStorage.removeItem('userInfo')
 
       this.userName = ''
       this.userID = ''
       this.userLevel = ''
     },
-    changeUserName () {
-      this.userName = 'Test'
-    },
     async callApiTest () {
       console.log('call api')
-      const response = await $fetch('https://shellfanstest-rr7tb4kqva-uc.a.run.app', {
+      const response = await $fetch('https://apitest2-rr7tb4kqva-uc.a.run.app', {
         method: 'GET'
       })
 
-      console.log("🚀 ~ file: user.js:62 ~ callApiTest ~ response:", response)
+      console.log('🚀 ~ file: user.js:62 ~ callApiTest ~ response:', response)
+    },
+    async changeUserName (name) {
+      const response = await $fetch('/api/test', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: {
+          userName: name
+        }
+      })
+
+      if (response.result) {
+        this.userName = name
+
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
+        userInfo.userName = name
+
+        localStorage.setItem('userInfo', JSON.stringify(userInfo))
+      } else {
+        console.error('hay man your request is not valid')
+      }
     }
   }
 })
