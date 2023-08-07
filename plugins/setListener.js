@@ -2,6 +2,7 @@ export default defineNuxtPlugin(() => {
   const handleResize = () => {
     console.log(window.innerWidth)
   }
+
   return {
     provide: {
       setResizeListener: () => {

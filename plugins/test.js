@@ -1,16 +1,17 @@
 export default defineNuxtPlugin(() => {
-const hey = () => {
+  const hey = () => {
     console.log('out side call')
-}
-return {
+  }
+
+  return {
     provide: {
-        hello: (word) => {
-            console.log('Hello', word)
-            hey()
-        },
-        apiHandle: (response) => {
-            console.log('api handle', response)
-        }
+      hello: word => {
+        console.log('Hello', word)
+        hey()
+      },
+      apiHandle: response => {
+        console.log('api handle', response)
+      }
     }
-}
+  }
 })

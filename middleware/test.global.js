@@ -1,4 +1,4 @@
-import { useUserStore } from "@/stores/user"
+import { useUserStore } from '@/stores/user'
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const userStore = useUserStore()
@@ -9,5 +9,4 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (!userStore.userName && to.name === 'user') {
     useRouter().push('/error')
   }
-
 })
