@@ -35,7 +35,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      BASE_API: config.api.base_url
+      BASE_API: config.api.base_url,
+      GOOGLE_CLIENT_ID: config.google.clientID
     }
   },
   css: [

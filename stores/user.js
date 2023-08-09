@@ -83,6 +83,45 @@ export const useUserStore = defineStore('user', {
       } else {
         console.error('hay man your request is not valid')
       }
+    },
+    /**
+     * @param {String} accessToken google client accessToken
+     */
+    async googleLogin (accessToken) {
+      const responsePayload = {
+        errorMessage: '',
+        result: false
+      }
+
+      if (!accessToken) {
+        responsePayload.errorMessage = 'Please check your Google accessToken'
+        return responsePayload
+      }
+
+      console.log('call api auth google')
+
+      const response = await $fetch('/api/auth/google', {
+        method: 'POST',
+        body: {
+          accessToken
+        }
+      })
+
+      console.log('after api auth google', response)
+
+      console.log(response?.data?.userInfo, 'user info in user js')
+      if (response?.data?.userInfo) {
+        const response = await this.login()
+
+        if (response.result) {
+          responsePayload.result = true
+        }
+      } else {
+        responsePayload.errorMessage = response
+      }
+
+      console.log(response)
+      return responsePayload
     }
   }
 })

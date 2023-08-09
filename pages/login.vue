@@ -1,10 +1,10 @@
 <template>
   <div class="w-full h-full flex items-center justify-center">
-    <rotatingCube
+    <!-- <rotatingCube
       :top="250"
       :left="700"
-    />
-    <!-- <earth /> -->
+    /> -->
+    <earth />
     <!-- Card -->
     <div
       class="backdrop-blur-2xl border border-white rounded w-[500px] h-[650px] pt-[120px]
@@ -50,6 +50,13 @@
         </div>
       </div>
       <!-- End Button Group -->
+      <!-- Google Sign In -->
+      <client-only>
+        <GoogleLogin :callback="googleLogin" popup-type="TOKEN">
+          <button>Het man google log in</button>
+        </GoogleLogin>
+      </client-only>
+      <!-- End Google Sign In -->
     </div>
     <!-- End Card -->
   </div>
@@ -59,8 +66,7 @@
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import baseInput from '@/components/baseInput.vue'
 import { useUserStore } from '@/stores/user.js'
-import rotatingCube from '@/components/rotatingCube.vue'
-// import earth from '@/components/earth.vue'
+import earth from '@/components/earth.vue'
 
 // stores
 const userStore = useUserStore()
@@ -160,6 +166,19 @@ const login = async () => {
     const router = useRouter()
 
     router.push('/user')
+  }
+}
+
+const googleLogin = async response => {
+  console.log(response, 'google login')
+  if (response.access_token) {
+    const googleLoginResponse = await userStore.googleLogin(response.access_token)
+
+    if (googleLoginResponse.result) {
+      const router = useRouter()
+
+      router.push('/user')
+    }
   }
 }
 

@@ -1,11 +1,19 @@
 <template>
   <div class="container">
     <div class="planet">
-      <div class="ball1" />
-      <div class="ball2" />
+      <div class="ball1">
+        <rotatingCube />
+      </div>
+      <div class="ball2">
+        <rotatingCube />
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import rotatingCube from '@/components/rotatingCube.vue'
+</script>
 
 <style scoped>
 .container {
@@ -19,38 +27,35 @@
 
 .planet {
   position: absolute;
-  border: 2px solid #001000;
+  /* border: 2px solid #001000; */
   transform-style: preserve-3d;
-  width: 200px;
-  height: 200px;
+  width: 1000px;
+  height: 1000px;
   transform: scaleY(0.5) rotateZ(45deg);
   border-radius: 50%;
-  animation: planet-rotate 5s linear infinite;
+  animation: planet-rotate 10s linear infinite;
 }
 
 .ball1 {
-  width: 50px;
-  height: 50px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
-  background-color: yellowgreen;
+  /* background-color: yellowgreen; */
   position: absolute;
-  left: calc(50% - 25px);
-  top: -25px;
-  transform: rotateZ(45deg);
+  left: calc(50% - 150px);
+  top: -150px;
   transform: rotateZ(-45deg) scaleY(2);
-  animation: self-rotate 5s linear infinite;
+  animation: self-rotate 10s linear infinite;
 }
 .ball2 {
-  width: 50px;
-  height: 50px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background-color: red;
   position: absolute;
-  right: calc(50% - 25px);
-  bottom: -25px;
-  transform: rotateZ(45deg);
+  right: calc(50% - 100px);
+  bottom: -100px;
   transform: rotateZ(-45deg) scaleY(2);
-  animation: test 5s linear infinite;
+  animation: test 10s linear infinite;
 }
 
 @keyframes planet-rotate {
@@ -65,9 +70,35 @@
 @keyframes self-rotate {
   0% {
     transform: rotate(0) scaleY(2) rotate(-45deg);
+    width: 100px;
+    height: 100px;
+    left: calc(50% - 50px);
+    top: -50px;
+  }
+  25% {
+    width: 200px;
+    height: 200px;
+    left: calc(50% - 100px);
+    top: -100px;
+  }
+  50% {
+    width: 300px;
+    height: 300px;
+    left: calc(50% - 150px);
+    top: -150px;
+  }
+  75% {
+    width: 200px;
+    height: 200px;
+    left: calc(50% - 100px);
+    top: -100px;
   }
   100% {
     transform: rotate(-360deg) scaleY(2) rotate(-45deg);
+    width: 100px;
+    height: 100px;
+    left: calc(50% - 50px);
+    top: -50px;
   }
 }
 
